@@ -1,0 +1,26 @@
+# Ambiente virtual Python
+.venv/
+venv/
+env/
+
+# Variáveis de ambiente e segredos
+.env.local
+
+# Arquivos Python compilados
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Arquivos do sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
