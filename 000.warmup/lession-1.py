@@ -1,25 +1,7 @@
-from openai import OpenAI
-from openai.types.chat import ChatCompletionSystemMessageParam, ChatCompletionUserMessageParam
-import dotenv
+from openai_utils import gerar_resposta
 
-dotenv.load_dotenv('.env')
-dotenv.load_dotenv('.env.local', override=True)
-
-client = OpenAI()
-
-mensagem_sistema: ChatCompletionSystemMessageParam = {
-    "role": "system",
-    "content": "Gere nomes de produtos fictícios sem descrição de acordo com a requisição do usuário."
-}
-
-mensagem_usuario: ChatCompletionUserMessageParam = {
-    "role": "user",
-    "content": "Gere 5 produtos"
-}
-
-resposta = client.chat.completions.create(
-    model="gpt-3.5-turbo-16k",
-    messages=[mensagem_sistema, mensagem_usuario]
+gerar_resposta(
+    prompt_sistema="Gere nomes de produtos fictícios sem descrição de acordo com a requisição do usuário.",
+    prompt_usuario="Gere 5 produtos",
+    model="gpt-3.5-turbo-16k"
 )
-
-print(resposta.choices[0].message.content)

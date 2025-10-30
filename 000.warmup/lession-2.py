@@ -1,11 +1,4 @@
-from openai import OpenAI
-from openai.types.chat import ChatCompletionSystemMessageParam, ChatCompletionUserMessageParam
-import dotenv
-
-dotenv.load_dotenv('.env')
-dotenv.load_dotenv('.env.local', override=True)
-
-client = OpenAI()
+from openai_utils import gerar_resposta
 
 
 def categorizar_produto(produto: str, categorias: str) -> None:
@@ -20,26 +13,13 @@ def categorizar_produto(produto: str, categorias: str) -> None:
     Esportes
     """
 
-    mensagem_sistema: ChatCompletionSystemMessageParam = {
-        "role": "system",
-        "content": prompt_sistema
-    }
-
-    mensagem_usuario: ChatCompletionUserMessageParam = {
-        "role": "user",
-        "content": produto
-    }
-
-    resposta = client.chat.completions.create(
+    gerar_resposta(
+        prompt_sistema=prompt_sistema,
+        prompt_usuario=produto,
         model="gpt-3.5-turbo",
-        messages=[mensagem_sistema, mensagem_usuario],
         temperature=1.0,
-        max_tokens=256,
-        top_p=1.0,
-        frequency_penalty=0.0,
-        presence_penalty=0.0
+        max_tokens=256
     )
-    print(resposta.choices[0].message.content)
 
 
 print("Digite as categorias validas:")
